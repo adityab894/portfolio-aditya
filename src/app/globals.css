@@ -1,26 +1,251 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-primary: #00ffb2;
+  --brand-secondary: #ff0066;
+  --brand-glow-bg: #abffe6;
+  --neutral-background: #08070e;
+  --neutral-text-primary: #f5f5f5;
+  --neutral-text-secondary: #d5d5d5;
+  --neutral-text-on-primary: #000000;
+  --neutral-border-primary: rgb(32, 32, 38);
+  --neutral-border-secondary: rgba(95, 95, 113, 0.22);
+  --neutral-surface-transparent: rgba(8, 7, 14, 0.8);
+  --font-family-primary: 'DM Sans', 'DM Sans Placeholder', sans-serif;
+  --spacing-s: 16px;
+  --spacing-m: 24px;
+  --spacing-l: 32px;
+  --spacing-xl: 48px;
+  --spacing-xxl: 96px;
+  --corner-radius-sm: 8px;
+  --corner-radius-md: 16px;
+  --corner-radius-lg: 40px;
+  --corner-radius-full: 50px;
+  --shadow-cta: 0px 0px 34px 0px rgba(42, 240, 124, 0.3), 0px 0px 0px 4px rgba(0, 255, 178, 0.1);
+  --shadow-inner: inset 0px 0px 16px 0px rgba(255, 255, 255, 0.08);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--neutral-background);
+  --color-foreground: var(--neutral-text-primary);
+  --font-sans: var(--font-family-primary);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Base */
+html, body {
+  background-color: var(--neutral-background);
+  color: var(--neutral-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography scale */
+.h1-hero {
+  font-family: var(--font-family-primary);
+  font-size: 82px;
+  font-weight: 400;
+  line-height: 90px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.h3-section {
+  font-family: var(--font-family-primary);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 48px;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.h4-quote {
+  font-family: var(--font-family-primary);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 40px;
+  letter-spacing: -0.02em;
+}
+
+.body-large {
+  font-family: var(--font-family-primary);
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.body-medium {
+  font-family: var(--font-family-primary);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.body-small {
+  font-family: var(--font-family-primary);
+  font-size: 14px;
+  line-height: 1.2em;
+}
+
+.label {
+  font-family: var(--font-family-primary);
+  font-size: 11px;
+  line-height: 14px;
+}
+
+/* Color utilities */
+.text-primary { color: var(--neutral-text-primary); }
+.text-secondary { color: var(--neutral-text-secondary); }
+.text-on-primary { color: var(--neutral-text-on-primary); }
+.text-brand { color: var(--brand-primary); }
+.text-accent { color: var(--brand-secondary); }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 24px;
+  border-radius: var(--corner-radius-full);
+  text-decoration: none;
+  transition: transform 200ms ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--brand-primary);
+  color: var(--neutral-text-on-primary);
+  box-shadow: var(--shadow-cta);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  font-weight: 500;
+}
+
+.btn-primary:hover { transform: scale(0.98); }
+.btn-primary:active { transform: scale(0.96); }
+
+.btn-secondary {
+  background-color: transparent;
+  border: 1px solid var(--neutral-border-secondary);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--neutral-text-primary);
+  font-weight: 500;
+}
+
+.btn-secondary:is(:hover, :focus-visible) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Header */
+.header-sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 24px;
+}
+
+.nav-container {
+  max-width: 1184px;
+  margin: 0 auto;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-color: var(--neutral-surface-transparent);
+  border: 1px solid var(--neutral-border-primary);
+  border-radius: var(--corner-radius-full);
+}
+
+.nav-glass {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px var(--spacing-m);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 24px;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--neutral-text-primary);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-m);
+}
+
+.nav-link {
+  color: var(--neutral-text-secondary);
+  text-decoration: none;
+  transition: color 200ms ease;
+  font-size: 16px;
+}
+
+.nav-link:hover { color: var(--neutral-text-primary); }
+
+.hamburger-menu {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: 8px;
+}
+
+/* Hero */
+.hero-section {
+  position: relative;
+  text-align: center;
+  padding: 96px 24px;
+  overflow-x: clip;
+}
+
+.hero-glow {
+  position: absolute;
+  inset: -200px;
+  z-index: -1;
+  background: radial-gradient(circle, var(--brand-glow-bg) 0%, transparent 40%), radial-gradient(circle, white 0%, transparent 40%);
+  background-position: -300px -300px, calc(100% + 300px) calc(100% + 100px);
+  background-repeat: no-repeat;
+  opacity: 0.05;
+  filter: blur(90px);
+}
+
+/* Scroll reveal */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 809px) {
+  .header-sticky { padding: 16px; }
+  .nav-container { border-radius: 16px; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: calc(100% + 16px);
+    left: 0;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    background-color: var(--neutral-surface-transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--neutral-border-primary);
+    padding: var(--spacing-s);
+    border-radius: var(--corner-radius-md);
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  .btn-secondary { display: none; }
+  .hamburger-menu { display: block; }
+  .h1-hero { font-size: 40px; line-height: 48px; }
 }
