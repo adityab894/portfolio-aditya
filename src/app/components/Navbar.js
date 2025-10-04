@@ -4,6 +4,21 @@ import { useEffect } from "react";
 
 export default function Navbar() {
   useEffect(() => {
+    const header = document.querySelector('.header-sticky');
+    const navContainer = document.querySelector('.nav-container');
+    
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        header?.classList.add('scrolled');
+        navContainer?.classList.add('shrunk');
+      } else {
+        header?.classList.remove('scrolled');
+        navContainer?.classList.remove('shrunk');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
     const hamburger = document.querySelector('.hamburger-menu');
     const navLinks = document.querySelector('.nav-links');
 
@@ -28,10 +43,15 @@ export default function Navbar() {
       });
 
       return () => {
+        window.removeEventListener('scroll', handleScroll);
         hamburger.removeEventListener('click', toggleMenu);
         linkCleanup.forEach((off) => off());
       };
     }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   return (

@@ -1,6 +1,7 @@
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -20,7 +21,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${dmSans.variable} antialiased overflow-x-hidden`}>
         <Navbar />
-        {children}
+        <div className="page-transition">
+          {children}
+        </div>
+        <Footer />
       </body>
     </html>
   );
